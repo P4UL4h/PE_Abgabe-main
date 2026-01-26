@@ -20,7 +20,7 @@
 		{
 			name: 'Paulas Pattern',
 			component: Pattern3,
-			description: 'Bla Bla'
+			description: 'test test'
 		},
 	];
 
