@@ -1,5 +1,5 @@
 <script>
-	import chroma from 'chroma-js';
+	// import chroma from 'chroma-js';
 	import Slider from '$lib/ui/Slider.svelte';
 	import Toggle from '$lib/ui/Toggle.svelte';
 
@@ -7,8 +7,8 @@
 	let LängeKurz = $state(25);
 	console.log(squareSize);
 
-	let differentGaps = $state(false);
-	let color2AsGaps = $state(false);
+	// let differentGaps = $state(false);
+	// let color2AsGaps = $state(false);
 
 	let offset = $state(65);
 	let offset2 = $state(0);
@@ -47,25 +47,25 @@
 					transform="translate({0 + (xi - 5) * squareSize} {0 + (yi - 5) * squareSize}) "
 					points="0 0, {squareSize / 2} {squareSize / 2 - LängeKurz}, {squareSize / 2} {squareSize /
 						2}, {squareSize / 2 - LängeKurz} {squareSize / 2}"
-					fill={getColor(xi, yi)}
+					stroke='white'
 				/>
 				<polygon
 					transform="translate({0 + (xi - 5) * squareSize} {0 + (yi - 5) * squareSize}) rotate(90)"
 					points="0 0, {squareSize / 2} {squareSize / 2 - LängeKurz}, {squareSize / 2} {squareSize /
 						2}, {squareSize / 2 - LängeKurz} {squareSize / 2}"
-					fill={getColor(xi, yi)}
+					stroke='white'
 				/>
 				<polygon
 					transform="translate({0 + (xi - 5) * squareSize} {0 + (yi - 5) * squareSize}) rotate(180)"
 					points="0 0, {squareSize / 2} {squareSize / 2 - LängeKurz}, {squareSize / 2} {squareSize /
 						2}, {squareSize / 2 - LängeKurz} {squareSize / 2}"
-					fill={getColor(xi, yi)}
+					stroke='white'
 				/>
 				<polygon
 					transform="translate({0 + (xi - 5) * squareSize} {0 + (yi - 5) * squareSize}) rotate(270)"
 					points="0 0, {squareSize / 2} {squareSize / 2 - LängeKurz}, {squareSize / 2} {squareSize /
 						2}, {squareSize / 2 - LängeKurz} {squareSize / 2}"
-					fill={getColor(xi, yi)}
+					stroke='white'
 				/>
 
 				<!-- Zwischenraum-Rauten -->
@@ -74,14 +74,14 @@
 					transform="translate({0 + (xi - 5) * squareSize} {0 + (yi - 5) * squareSize})"
 					points="0 0, {squareSize / 2} {-squareSize / 2 + LängeKurz}, {squareSize} 0, {squareSize /
 						2} {squareSize / 2 - LängeKurz}"
-					fill={color3}
+					stroke='white'
 				/>
 				<!-- unten -->
 				<polygon
 					transform="translate({0 + (xi - 5) * squareSize} {0 + (yi - 5) * squareSize}) rotate(90)"
 					points="0 0, {squareSize / 2} {-squareSize / 2 + LängeKurz}, {squareSize} 0, {squareSize /
 						2} {squareSize / 2 - LängeKurz}"
-					fill={color4}
+					stroke='white'
 				/>
 			{/each}
 		{/each}
@@ -92,8 +92,8 @@
 	<Slider min={100} max={250} bind:value={squareSize} label="Modulgröße" />
 	<Slider min={0} max={squareSize / 2} bind:value={LängeKurz} label="Breite" />
 	<!-- <Slider min={0} max={360} bind:value={hue} label="Farbton" /> -->
-	<Toggle bind:value={differentGaps} label="Unterschiedliche Zwischenraumfarben" />
-	<Toggle bind:value={color2AsGaps} label="Visuelle Lücken" />
+	<!-- <Toggle bind:value={differentGaps} label="Unterschiedliche Zwischenraumfarben" />
+	<Toggle bind:value={color2AsGaps} label="Visuelle Lücken" /> -->
 </div>
 
 <!-- <div class="ui">

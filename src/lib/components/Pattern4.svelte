@@ -7,8 +7,8 @@
 	let LängeKurz = $state(25);
 	console.log(squareSize);
 
-	// let differentGaps = $state(false);
-	// let color2AsGaps = $state(false);
+	let differentGaps = $state(false);
+	let color2AsGaps = $state(false);
 
 	let offset = $state(65);
 	let offset2 = $state(0);
@@ -17,22 +17,22 @@
 
 	let hue = $state(0);
 	let color1 = $derived(chroma.oklch(0.5, 0.2, hue).hex());
-	let color2 = $derived(chroma.oklch(0.3, 0.2, hue).hex());
-	// let color3 = $derived(chroma.oklch(0.7, 0.2, hue).hex());
-	// let color4 = $derived(differentGaps ? chroma.oklch(0.9, 0.2, hue).hex() : color3);
+	let color2 = $derived(color2AsGaps ? color3 : chroma.oklch(0.3, 0.2, hue).hex());
+	let color3 = $derived(chroma.oklch(0.7, 0.2, hue).hex());
+	let color4 = $derived(differentGaps ? chroma.oklch(0.9, 0.2, hue).hex() : color3);
 
 	function getColor(xi, yi) {
 		if (yi % 2 == 0) {
 			if (xi % 2 == 0) {
-				return color1;
-			} else {
 				return color2;
+			} else {
+				return color1;
 			}
 		} else {
 			if (xi % 2 == 0) {
-				return color2;
-			} else {
 				return color1;
+			} else {
+				return color2;
 			}
 		}
 	}
@@ -42,35 +42,40 @@
 	<svg viewBox="-500 -500 1000 1000" class="svg-canvas">
 		{#each Array(11) as _, yi}
 			{#each Array(11) as _, xi}
-				<!-- unten rechts -->
-				<polygon
-					transform="translate({0 + (xi - 5) * squareSize} {0 + (yi - 5) * squareSize}) "
-					points="0 0, {squareSize / 2} {squareSize / 2 - LängeKurz}, {squareSize / 2} {squareSize /
-						2}, {squareSize / 2 - LängeKurz} {squareSize / 2}"
-					fill={getColor(xi, yi)}
-					stroke='white'
-				/>
-				<polygon
-					transform="translate({0 + (xi - 5) * squareSize} {0 + (yi - 5) * squareSize}) rotate(90)"
-					points="0 0, {squareSize / 2} {squareSize / 2 - LängeKurz}, {squareSize / 2} {squareSize /
-						2}, {squareSize / 2 - LängeKurz} {squareSize / 2}"
-					fill={getColor(xi, yi)}
-					stroke='white'
-				/>
-				<polygon
-					transform="translate({0 + (xi - 5) * squareSize} {0 + (yi - 5) * squareSize}) rotate(180)"
-					points="0 0, {squareSize / 2} {squareSize / 2 - LängeKurz}, {squareSize / 2} {squareSize /
-						2}, {squareSize / 2 - LängeKurz} {squareSize / 2}"
-					fill={getColor(xi, yi)}
-					stroke='white'
-				/>
-				<polygon
-					transform="translate({0 + (xi - 5) * squareSize} {0 + (yi - 5) * squareSize}) rotate(270)"
-					points="0 0, {squareSize / 2} {squareSize / 2 - LängeKurz}, {squareSize / 2} {squareSize /
-						2}, {squareSize / 2 - LängeKurz} {squareSize / 2}"
-					fill={getColor(xi, yi)}
-					stroke='white'
-				/>
+				<g>
+					<!-- unten rechts -->
+					<polygon
+						transform="translate({0 + (xi - 5) * squareSize + (yi % 2) * (-squareSize / 2)} {0 + (yi - 5) * squareSize - (yi % 2) * LängeKurz}) "
+						points="0 0, {squareSize / 2} {squareSize / 2 - LängeKurz}, {squareSize /
+							2} {squareSize / 2}, {squareSize / 2 - LängeKurz} {squareSize / 2}"
+						fill={getColor(xi, yi)}
+						stroke='white'
+					/>
+					<polygon
+						transform="translate({0 + (xi - 4) * squareSize + (yi % 2) * (-squareSize / 2)} {0 +
+							(yi - 5) * squareSize - (yi % 2) * LängeKurz}) rotate(90)"
+						points="0 0, {squareSize / 2} {squareSize / 2 - LängeKurz}, {squareSize /
+							2} {squareSize / 2}, {squareSize / 2 - LängeKurz} {squareSize / 2}"
+						fill={getColor(xi, yi)}
+						stroke='white'
+					/>
+					 <polygon
+						transform="translate({0 + (xi - 4) * squareSize + (yi % 2) * (-squareSize / 2)} {0 +
+							(yi - 4) * squareSize - (yi % 2) * LängeKurz}) rotate(180)"
+						points="0 0, {squareSize / 2} {squareSize / 2 - LängeKurz}, {squareSize /
+							2} {squareSize / 2}, {squareSize / 2 - LängeKurz} {squareSize / 2 }"
+						fill={getColor(xi, yi)}
+						stroke='white'
+					/>
+					<polygon
+						transform="translate({0 + (xi - 5) * squareSize + (yi % 2) * (-squareSize / 2)} {0 +
+							(yi - 4) * squareSize - (yi % 2) * LängeKurz}) rotate(270)"
+						points="0 0, {squareSize / 2} {squareSize / 2 - LängeKurz}, {squareSize /
+							2} {squareSize / 2}, {squareSize / 2 - LängeKurz} {squareSize / 2}"
+						fill={getColor(xi, yi)}
+						stroke='white'
+					/>
+				</g>
 
 				<!-- Zwischenraum-Rauten -->
 				<!-- rechts -->
@@ -78,14 +83,14 @@
 					transform="translate({0 + (xi - 5) * squareSize} {0 + (yi - 5) * squareSize})"
 					points="0 0, {squareSize / 2} {-squareSize / 2 + LängeKurz}, {squareSize} 0, {squareSize /
 						2} {squareSize / 2 - LängeKurz}"
-					fill={getColor(xi, yi)}
+					fill={color3}
 				/> -->
 				<!-- unten -->
 				<!-- <polygon
 					transform="translate({0 + (xi - 5) * squareSize} {0 + (yi - 5) * squareSize}) rotate(90)"
 					points="0 0, {squareSize / 2} {-squareSize / 2 + LängeKurz}, {squareSize} 0, {squareSize /
 						2} {squareSize / 2 - LängeKurz}"
-					fill={getColor(xi, yi)}
+					fill={color4}
 				/> -->
 			{/each}
 		{/each}
@@ -96,8 +101,8 @@
 	<Slider min={100} max={250} bind:value={squareSize} label="Modulgröße" />
 	<Slider min={0} max={squareSize / 2} bind:value={LängeKurz} label="Breite" />
 	<Slider min={0} max={360} bind:value={hue} label="Farbton" />
-	<!-- <Toggle bind:value={differentGaps} label="Unterschiedliche Zwischenraumfarben" />
-	<Toggle bind:value={color2AsGaps} label="Visuelle Lücken" /> -->
+	<Toggle bind:value={differentGaps} label="Unterschiedliche Zwischenraumfarben" />
+	<Toggle bind:value={color2AsGaps} label="Visuelle Lücken" />
 </div>
 
 <!-- <div class="ui">

@@ -2,25 +2,31 @@
 	import Header from '$lib/components/Header.svelte';
 
 	import { slide } from 'svelte/transition';
-	import Pattern1 from '$lib/components/1_PatternPolygonReactive.svelte';
-	import Pattern2 from '$lib/components/2_PatternPolygonReactiveOffsetSize.svelte';
+	import Pattern1 from '$lib/components/Pattern1.svelte';
+	import Pattern2 from '$lib/components/Pattern2.svelte';
 	import Pattern3 from '$lib/components/Pattern3.svelte';
+	import Pattern4 from '$lib/components/Pattern4.svelte';
 
 	let patterns = [
 		{
-			name: 'Squares in the Grid (offset)',
+			name: 'Variante 1',
 			component: Pattern1,
-			description: 'A grid of squares divided into two triangles that can get an offset.'
+			description: 'erster Ansatz ohne Farbe'
 		},
 		{
-			name: 'Squares in the Grid (offset and size)',
+			name: 'Variante 2',
 			component: Pattern2,
-			description: 'A grid of squares divided into two triangles that can get an offset and size.'
+			description: 'Hinzufügen von Farbe'
 		},
 		{
-			name: 'Paulas Pattern',
+			name: 'Variante 3',
 			component: Pattern3,
-			description: 'test test'
+			description: 'Erweiterte Funktionen'
+		},
+		{
+			name: 'Muster 2',
+			component: Pattern4,
+			description: 'gleiche Form anderes Muster'
 		},
 	];
 
