@@ -4,7 +4,9 @@
 	import Toggle from '$lib/ui/Toggle.svelte';
 
 	let squareSize = $state(100);
-	let LängeKurz = $state(25);
+	let lengthRatio = $state(0.25);
+
+	let LängeKurz = $derived(squareSize * lengthRatio);
 	console.log(squareSize);
 
 	let differentGaps = $state(false);
@@ -40,38 +42,31 @@
 
 <div class="svg-container">
 	<svg viewBox="-500 -500 1000 1000" class="svg-canvas">
-		{#each Array(11) as _, yi}
+		{#each Array(13) as _, yi}
 			{#each Array(11) as _, xi}
 				<g>
 					<!-- unten rechts -->
 					<polygon
-						transform="translate({0 + (xi - 5) * squareSize + (yi % 2) * (-squareSize / 2)} {0 + (yi - 5) * squareSize - (yi % 2) * LängeKurz}) "
-						points="0 0, {squareSize / 2} {squareSize / 2 - LängeKurz}, {squareSize /
-							2} {squareSize / 2}, {squareSize / 2 - LängeKurz} {squareSize / 2}"
+						transform="translate({0 + (xi - 5) * squareSize + (yi % 2) * (-squareSize / 2)} {0 + (yi - 5) * squareSize - ((yi)) * (LängeKurz)}) "
+						points="0 0, {squareSize / 2} {squareSize / 2 - LängeKurz}, {squareSize /2} {squareSize / 2}, {squareSize / 2 - LängeKurz} {squareSize / 2}"
 						fill={getColor(xi, yi)}
 						stroke='white'
 					/>
 					<polygon
-						transform="translate({0 + (xi - 4) * squareSize + (yi % 2) * (-squareSize / 2)} {0 +
-							(yi - 5) * squareSize - (yi % 2) * LängeKurz}) rotate(90)"
-						points="0 0, {squareSize / 2} {squareSize / 2 - LängeKurz}, {squareSize /
-							2} {squareSize / 2}, {squareSize / 2 - LängeKurz} {squareSize / 2}"
+						transform="translate({0 + (xi - 4) * squareSize + (yi % 2) * (-squareSize / 2)} {0 + (yi - 5) * squareSize - ((yi)) * (LängeKurz)}) rotate(90)"
+						points="0 0, {squareSize / 2} {squareSize / 2 - LängeKurz}, {squareSize /2} {squareSize / 2}, {squareSize / 2 - LängeKurz} {squareSize / 2}"
 						fill={getColor(xi, yi)}
 						stroke='white'
 					/>
 					 <polygon
-						transform="translate({0 + (xi - 4) * squareSize + (yi % 2) * (-squareSize / 2)} {0 +
-							(yi - 4) * squareSize - (yi % 2) * LängeKurz}) rotate(180)"
-						points="0 0, {squareSize / 2} {squareSize / 2 - LängeKurz}, {squareSize /
-							2} {squareSize / 2}, {squareSize / 2 - LängeKurz} {squareSize / 2 }"
+						transform="translate({0 + (xi - 4) * squareSize + (yi % 2) * (-squareSize / 2)} {0 + (yi - 4) * squareSize - ((yi)) * (LängeKurz)}) rotate(180)"
+						points="0 0, {squareSize / 2} {squareSize / 2 - LängeKurz}, {squareSize /2} {squareSize / 2}, {squareSize / 2 - LängeKurz} {squareSize / 2 }"
 						fill={getColor(xi, yi)}
 						stroke='white'
 					/>
 					<polygon
-						transform="translate({0 + (xi - 5) * squareSize + (yi % 2) * (-squareSize / 2)} {0 +
-							(yi - 4) * squareSize - (yi % 2) * LängeKurz}) rotate(270)"
-						points="0 0, {squareSize / 2} {squareSize / 2 - LängeKurz}, {squareSize /
-							2} {squareSize / 2}, {squareSize / 2 - LängeKurz} {squareSize / 2}"
+						transform="translate({0 + (xi - 5) * squareSize + (yi % 2) * (-squareSize / 2)} {0 + (yi - 4) * squareSize - ((yi)) * (LängeKurz )}) rotate(270)"
+						points="0 0, {squareSize / 2} {squareSize / 2 - LängeKurz}, {squareSize /2} {squareSize / 2}, {squareSize / 2 - LängeKurz} {squareSize / 2}"
 						fill={getColor(xi, yi)}
 						stroke='white'
 					/>
@@ -99,7 +94,7 @@
 
 <div class="sidebar-right">
 	<Slider min={100} max={250} bind:value={squareSize} label="Modulgröße" />
-	<Slider min={0} max={squareSize / 2} bind:value={LängeKurz} label="Breite" />
+	<Slider min={0} max={squareSize / 2} step={0.01} bind:value={lengthRatio} label="Breite" />
 	<Slider min={0} max={360} bind:value={hue} label="Farbton" />
 	<Toggle bind:value={differentGaps} label="Unterschiedliche Zwischenraumfarben" />
 	<Toggle bind:value={color2AsGaps} label="Visuelle Lücken" />
