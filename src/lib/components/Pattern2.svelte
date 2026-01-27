@@ -36,6 +36,9 @@
 			}
 		}
 	}
+
+	let showStroke = $state(true);
+
 </script>
 
 <div class="svg-container">
@@ -48,28 +51,28 @@
 					points="0 0, {squareSize / 2} {squareSize / 2 - LängeKurz}, {squareSize / 2} {squareSize /
 						2}, {squareSize / 2 - LängeKurz} {squareSize / 2}"
 					fill={getColor(xi, yi)}
-					stroke='white'
+					stroke={showStroke ? 'white' : 'none'}
 				/>
 				<polygon
 					transform="translate({0 + (xi - 5) * squareSize} {0 + (yi - 5) * squareSize}) rotate(90)"
 					points="0 0, {squareSize / 2} {squareSize / 2 - LängeKurz}, {squareSize / 2} {squareSize /
 						2}, {squareSize / 2 - LängeKurz} {squareSize / 2}"
 					fill={getColor(xi, yi)}
-					stroke='white'
+					stroke={showStroke ? 'white' : 'none'}
 				/>
 				<polygon
 					transform="translate({0 + (xi - 5) * squareSize} {0 + (yi - 5) * squareSize}) rotate(180)"
 					points="0 0, {squareSize / 2} {squareSize / 2 - LängeKurz}, {squareSize / 2} {squareSize /
 						2}, {squareSize / 2 - LängeKurz} {squareSize / 2}"
 					fill={getColor(xi, yi)}
-					stroke='white'
+					stroke={showStroke ? 'white' : 'none'}
 				/>
 				<polygon
 					transform="translate({0 + (xi - 5) * squareSize} {0 + (yi - 5) * squareSize}) rotate(270)"
 					points="0 0, {squareSize / 2} {squareSize / 2 - LängeKurz}, {squareSize / 2} {squareSize /
 						2}, {squareSize / 2 - LängeKurz} {squareSize / 2}"
 					fill={getColor(xi, yi)}
-					stroke='white'
+					stroke={showStroke ? 'white' : 'none'}
 				/>
 
 				<!-- Zwischenraum-Rauten -->
@@ -96,6 +99,7 @@
 	<Slider min={100} max={250} bind:value={squareSize} label="Modulgröße" />
 	<Slider min={0} max={squareSize / 2} bind:value={LängeKurz} label="Breite" />
 	<Slider min={0} max={360} bind:value={hue} label="Farbton" />
+	<Toggle bind:value={showStroke} label="Umrandungen" />
 	<!-- <Toggle bind:value={differentGaps} label="Unterschiedliche Zwischenraumfarben" />
 	<Toggle bind:value={color2AsGaps} label="Visuelle Lücken" /> -->
 </div>
