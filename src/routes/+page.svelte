@@ -6,6 +6,7 @@
 	import Pattern2 from '$lib/components/Pattern2.svelte';
 	import Pattern3 from '$lib/components/Pattern3.svelte';
 	import Pattern4 from '$lib/components/Pattern4.svelte';
+	import Pattern5 from '$lib/components/Pattern5.svelte';
 
 	let patterns = [
 		{
@@ -21,11 +22,16 @@
 		{
 			name: 'Variante 3',
 			component: Pattern3,
-			description: 'Erweiterte Funktionen'
+			description: 'Nutzung der Zwischenräumen'
+		},
+		{
+			name: 'Variante 4',
+			component: Pattern4,
+			description: 'Spiel mit Farbe'
 		},
 		{
 			name: 'Muster 2',
-			component: Pattern4,
+			component: Pattern5,
 			description: 'gleiche Form anderes Muster'
 		},
 	];
